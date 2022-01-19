@@ -46,6 +46,10 @@ export default new Vuex.Store({
       context.commit("addBookList", payload);
     },
   },
-  getters: {},
+  getters: {
+    getBookList(state) {
+      return state.books;
+    },
+  },
   modules: {},
 });
