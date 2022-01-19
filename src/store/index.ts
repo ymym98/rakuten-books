@@ -9,7 +9,33 @@ export default new Vuex.Store({
   state: {
     books: new Array<Book>(),
   },
-  mutations: {},
+  mutations: {
+    addBookList(state, payload) {
+      console.dir("payload:" + JSON.stringify(payload));
+      for (const book of payload.Items) {
+        state.books.push(
+          new Book(
+            book.author,
+            book.authorKana,
+            book.itemCaption,
+            book.itemPrice,
+            book.itemUrl,
+            book.largeImageUrl,
+            book.mediumImageUrl,
+            book.publisherName,
+            book.salesDate,
+            book.size,
+            book.smallImageUrl,
+            book.subTitle,
+            book.subTitleKana,
+            book.title,
+            book.titleKana
+          )
+        );
+      }
+      console.log("books:" + state.books);
+    },
+  },
   actions: {
     async getBookList(context, payload) {
       const response = await axios.get(
@@ -20,5 +46,6 @@ export default new Vuex.Store({
       context.commit("addBookList", payload);
     },
   },
+  getters: {},
   modules: {},
 });
