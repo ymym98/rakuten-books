@@ -1,6 +1,14 @@
 <template>
   <div>
-    {{ bookList }}
+    <div v-for="book of bookList" v-bind:key="book.itemUrl">
+      <div>
+        <img :src="book.mediumImageUrl" />
+        <span>
+          {{ book.author }}
+          {{ book.itemCaption }}
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
