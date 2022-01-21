@@ -1,8 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav"></div>
+    <Header />
     <router-view />
   </div>
 </template>
 
-<style></style>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import Header from "./components/Header.vue";
+
+@Component({
+  components: { Header },
+})
+export default class App extends Vue {}
+</script>
