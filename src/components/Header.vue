@@ -1,6 +1,8 @@
 <template>
   <header>
-    <img class="icon" src="/img/yumi_book.png" />
+    <div class="icon_btn">
+      <img class="icon" src="/img/yumi_book.png" />
+    </div>
     <ul class="nav">
       <li class="nav_item"><a href="#"> Home</a></li>
       <li class="nav_item"><a href="#">Service</a></li>
