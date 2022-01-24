@@ -10,22 +10,6 @@ header {
   background-color: #f3f1e4;
   margin-bottom: 200px;
   display: flex;
-}
-.nav {
-  display: flex;
-  list-style: none;
-  width: 100%;
-  align-items: flex-end;
-}
-.nav_item {
-  width: calc(100% / 4);
-}
-
-.nav_item > a {
-  display: block;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: black;
+  position: fixed;
+  z-index: 10;
 }
