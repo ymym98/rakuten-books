@@ -3,6 +3,7 @@
     <div class="icon_btn">
       <img class="icon" src="/img/yumi_book.png" />
     </div>
+    <my-btn></my-btn>
     <ul class="nav">
       <li class="nav_item"><a href="#"> Home</a></li>
       <li class="nav_item"><a href="#">Service</a></li>
@@ -14,8 +15,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import MyBtn from "./MyBtn.vue";
 
-@Component
+@Component({
+  components: {
+    MyBtn,
+  },
+})
 export default class Header extends Vue {}
 </script>
 
