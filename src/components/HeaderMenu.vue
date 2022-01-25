@@ -20,7 +20,6 @@ export default class HeaderMenu extends Vue {}
 .nav {
   display: flex;
   list-style: none;
-
   align-items: flex-end;
 }
 .nav_item {
