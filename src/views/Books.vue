@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div v-for="book of bookList" v-bind:key="book.itemUrl">
-      <div>
+    <ul v-for="book of bookList" v-bind:key="book.itemUrl">
+      <li>
         <img :src="book.mediumImageUrl" />
         <span>
           {{ book.author }}
           {{ book.itemCaption }}
         </span>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -28,4 +28,8 @@ export default class Books extends Vue {
 }
 </script>
 
-<style></style>
+<style scoped>
+li {
+  margin-top: 30px;
+}
+</style>
