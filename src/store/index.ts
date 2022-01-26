@@ -22,6 +22,7 @@ export default new Vuex.Store({
       for (const item of payload.Items) {
         state.books.push(
           new Book(
+            item.Item.isbn,
             item.Item.author,
             item.Item.authorKana,
             item.Item.itemCaption,

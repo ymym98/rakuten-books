@@ -3,6 +3,8 @@
  */
 export class Book {
   constructor(
+    // ISBNコード
+    private _isbn: number,
     // 著者
     private _author: string,
     // 著者カナ
@@ -34,6 +36,14 @@ export class Book {
     // タイトルカナ
     private _titleKana: string
   ) {}
+
+  public get isbn(): number {
+    return this._isbn;
+  }
+
+  public set isbn(isbn: number) {
+    this._isbn = isbn;
+  }
 
   public get author(): string {
     return this._author;

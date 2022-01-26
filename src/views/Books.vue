@@ -1,35 +1,28 @@
 <template>
   <div>
-    <ul v-for="book of bookList" v-bind:key="book.itemUrl">
-      <li>
-        <img :src="book.mediumImageUrl" />
-        <span>
-          {{ book.author }}
-          {{ book.itemCaption }}
-        </span>
-      </li>
-    </ul>
+    <div class="bookshelf">
+      <book-item class="itemShelf"> </book-item>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Book } from "@/types/Book";
+import BookItem from "@/components/BookItem.vue";
 import { Component, Vue } from "vue-property-decorator";
 
-@Component
-export default class Books extends Vue {
-  private bookList = new Array<Book>();
-
-  async created(): Promise<void> {
-    await this.$store.dispatch("getBookList");
-    this.bookList = this.$store.getters.getBookList;
-    console.dir("bookList:" + JSON.stringify(this.bookList));
-  }
-}
+@Component({
+  components: { BookItem },
+})
+export default class Books extends Vue {}
 </script>
 
 <style scoped>
-li {
-  margin-top: 30px;
+.bookshelf {
+  box-sizing: border-box;
+  background-color: #f8f7ef;
+  width: 76%;
+  margin: 0px auto;
+  line-height: 1;
+  margin-bottom: 60px;
 }
 </style>
