@@ -51,7 +51,7 @@ export default new Vuex.Store({
      */
     async getBookList(context, payload) {
       const response = await axios.get(
-        "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&title=%E5%A4%AA%E9%99%BD&booksGenreId=001004008&applicationId=1028649662998988122"
+        "https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?format=json&keyword=%E6%9C%AC&booksGenreId=000&applicationId=1028649662998988122"
       );
       payload = response.data;
       context.commit("addBookList", payload);
