@@ -1,6 +1,8 @@
 <template>
   <div>
-    <book-item></book-item>
+    <div class="bookshelf">
+      <book-item class="itemShelf"> </book-item>
+    </div>
   </div>
 </template>
 
@@ -15,7 +17,12 @@ export default class Books extends Vue {}
 </script>
 
 <style scoped>
-li {
-  margin-top: 30px;
+.bookshelf {
+  box-sizing: border-box;
+  background-color: #f8f7ef;
+  width: 76%;
+  margin: 0px auto;
+  line-height: 1;
+  margin-bottom: 60px;
 }
 </style>

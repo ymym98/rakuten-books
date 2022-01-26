@@ -30,12 +30,18 @@ export default class BookItem extends Vue {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 40px 30px 40px 30px;
 }
+
+ul {
+  width: calc(100% / 6);
+  border-bottom: solid 6px #b0a690;
+}
+
 li {
-  width: auto;
   list-style: none;
-  margin-right: 7px;
-  margin-bottom: 26px;
+  margin-top: 40px;
+  padding-left: 40px;
 }
 img {
   height: 134px;
