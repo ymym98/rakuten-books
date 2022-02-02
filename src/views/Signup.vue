@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts">
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import { firebaseApp, firebaseConfig } from "@/config/firebase-config";
+// import "firebase/compat/auth";
 import { Component, Vue } from "vue-property-decorator";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+// import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { app } from "../config/firebase-config";
 
 @Component
 export default class Signup extends Vue {
@@ -30,17 +30,40 @@ export default class Signup extends Vue {
   // 登録のエラーメッセージ
   private errorSignup = "";
 
-  async signup(): Promise<void> {
-    try {
-      const auth = getAuth(firebaseApp);
-      createUserWithEmailAndPassword(auth, this.email, this.password);
-      alert("成功！");
+  signup(): void {
+    const auth = getAuth(app);
+    createUserWithEmailAndPassword(auth, this.email, this.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        alert("成功");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("errorCode" + errorCode);
+        console.log("errorMessage" + errorMessage);
+      });
 
-      this.$router.push("/bookList");
-    } catch (error) {
-      console.log("エラー発生：" + error);
-      this.errorSignup = "登録に失敗しました";
-    }
+    // async signup(): Promise<void> {
+    //   try {
+    //     console.log("email:" + this.email);
+    //     console.log("pass:" + this.password);
+
+    //     const auth = getAuth(firebaseApp);
+    //     const user = createUserWithEmailAndPassword(
+    //       auth,
+    //       this.email,
+    //       this.password
+    //     );
+    //     console.log(user);
+
+    //     this.$router.push("/bookList");
+    //   } catch (error) {
+    //     console.log("エラー発生：" + error);
+    //     this.errorSignup = "登録に失敗しました";
+    //   }
+    // }
   }
 }
 </script>
