@@ -5,7 +5,11 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
+    path: "/signup",
+    component: () => import("../views/Signup.vue"),
+  },
+  {
+    path: "/bookList",
     component: () => import("../views/Books.vue"),
   },
 ];

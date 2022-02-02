@@ -1,7 +1,13 @@
 <template>
   <div>
     <ul>
-      <li><button type="button" class="singUp">新規会員登録</button></li>
+      <li>
+        <router-link to="/signup"
+          ><button type="button" class="singUp">
+            新規会員登録
+          </button></router-link
+        >
+      </li>
       <li><button type="button" class="signIn">ログイン</button></li>
     </ul>
   </div>

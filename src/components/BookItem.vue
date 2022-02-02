@@ -20,7 +20,7 @@ export default class BookItem extends Vue {
   async created(): Promise<void> {
     await this.$store.dispatch("getBookList");
     this.bookList = this.$store.getters.getBookList;
-    console.dir("bookList:" + JSON.stringify(this.bookList));
+    // console.dir("bookList:" + JSON.stringify(this.bookList));
   }
 }
 </script>
