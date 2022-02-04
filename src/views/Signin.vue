@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div class="registration">新規会員登録</div>
-    <div class="errorMsg">{{ errorSignup }}</div>
+    <div class="registration">ログイン</div>
+    <div class="errorMsg">{{ errorSignin }}</div>
     <form>
       <div class="registrationForm">
-        <div class="msg">メールアドレスを利用して会員登録をする</div>
+        <div class="msg">会員IDとパスワードを入力してください</div>
         <div class="email">
           <div class="errorMsg">{{ errorEmail }}</div>
           <input
             type="email"
-            placeholder="メールアドレス（半角/英数）"
+            placeholder="会員ID（メールアドレス）"
             v-model="email"
           />
         </div>
@@ -21,7 +21,12 @@
             v-model="password"
           />
         </div>
-        <button type="button" @click="signup"><span>登録</span></button>
+        <button type="button" @click="signin"><span>ログイン</span></button>
+        <div>
+          <router-link to="/signup"
+            >はじめてご利用になる方はこちら
+          </router-link>
+        </div>
       </div>
     </form>
   </div>
@@ -29,19 +34,19 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from "../config/firebase-config";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "@/config/firebase-config";
 
 @Component
-export default class Signup extends Vue {
+export default class Signin extends Vue {
   // メールアドレス
   private email = "";
 
   // パスワード
   private password = "";
 
-  // 登録のエラーメッセージ
-  private errorSignup = "";
+  // ログインに失敗した際のエラーメッセージ
+  private errorSignin = "";
 
   // メールアドレスのエラーメッセージ
   private errorEmail = "";
@@ -49,29 +54,29 @@ export default class Signup extends Vue {
   // パスワードのエラーメッセージ
   private errorPassword = "";
 
-  // 正しいメールアドレスの形式
-  private validEmail =
-    /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/;
-
   /**
-   * createUserWithEmailAndPasswordに入力されたメールアドレスとパスワードを渡して会員登録処理を行う.
+   * signInWithEmailAndPasswordに入力されたメールアドレスとパスワードを渡してログインの処理を行う.
    */
-  signup(): void {
-    // エラーメッセージの初期化
+  signin(): void {
     this.errorEmail = "";
     this.errorPassword = "";
-
     const auth = getAuth(app);
-    createUserWithEmailAndPassword(auth, this.email, this.password)
+    signInWithEmailAndPassword(auth, this.email, this.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        alert("成功");
+        console.log("ユーザー情報：" + JSON.stringify(user));
+        this.$router.push("/booklist");
       })
       .catch((error) => {
-        this.errorSignup = "会員登録に失敗しました";
         const errorCode = error.code;
         const errorMessage = error.message;
+        // 入力欄が空の状態でログインボタンを押したらメールアドレスとパスワードのエラーメッセージのみ表示させる
+        if (this.email === "" || this.password === "") {
+          this.errorSignin = "";
+        } else {
+          this.errorSignin =
+            "入力した会員ID(メールアドレス)またはパスワードが間違っています。";
+        }
         console.log("errorCode" + errorCode);
         console.log("errorMessage" + errorMessage);
       });
@@ -79,20 +84,10 @@ export default class Signup extends Vue {
     // メールアドレスのエラーチェック
     if (this.email === "") {
       this.errorEmail = "メールアドレスを入力してください";
-    } else if (this.validEmail.test(this.email)) {
-      // パターンにマッチした場合
-      this.errorEmail = "";
-    } else {
-      // パターンにマッチしない場合
-      this.errorEmail =
-        "メールアドレスの形式で入力してください（例）email@book.jp";
     }
-
     // パスワードのエラーチェック
     if (this.password === "") {
       this.errorPassword = "パスワードを入力してください";
-    } else if (this.password.length < 6) {
-      this.errorPassword = "パスワードは6文字以上で入力してください";
     }
   }
 }
@@ -137,10 +132,10 @@ button {
   color: white;
   border-radius: 4px;
   width: 100px;
-  background-color: #f25371;
+  background-color: #0085cd;
   margin-top: 12px;
 }
 button:hover {
-  background-color: #f58394;
+  background-color: #62a6d5;
 }
 </style>

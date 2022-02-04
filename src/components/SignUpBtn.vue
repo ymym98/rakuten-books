@@ -8,7 +8,11 @@
           </button></router-link
         >
       </li>
-      <li><button type="button" class="signIn">ログイン</button></li>
+      <li>
+        <router-link to="/signin">
+          <button type="button" class="signIn">ログイン</button>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
