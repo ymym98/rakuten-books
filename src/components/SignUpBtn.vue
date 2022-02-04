@@ -40,8 +40,14 @@ button {
   width: 124px;
   background-color: #f25371;
 }
+.singUp:hover {
+  background-color: #f58394;
+}
 .signIn {
   background-color: #0085cd;
   width: 84px;
+}
+.signIn:hover {
+  background-color: #62a6d5;
 }
 </style>

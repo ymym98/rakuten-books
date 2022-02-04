@@ -4,8 +4,9 @@
     <div class="errorMsg">{{ errorSignup }}</div>
     <form>
       <div class="registrationForm">
-        <div class="msg">メールアドレスとパスワードを入力してください</div>
+        <div class="msg">メールアドレスを利用して会員登録をする</div>
         <div class="email">
+          <div class="errorMsg">{{ errorEmail }}</div>
           <input
             type="email"
             placeholder="メールアドレス（半角/英数）"
@@ -13,6 +14,7 @@
           />
         </div>
         <div class="password">
+          <div class="errorMsg">{{ errorPassword }}</div>
           <input
             type="password"
             placeholder="パスワード（半角/英数）"
@@ -34,15 +36,31 @@ import { app } from "../config/firebase-config";
 export default class Signup extends Vue {
   // メールアドレス
   private email = "";
+
   // パスワード
   private password = "";
+
   // 登録のエラーメッセージ
   private errorSignup = "";
+
+  // メールアドレスのエラーメッセージ
+  private errorEmail = "";
+
+  // パスワードのエラーメッセージ
+  private errorPassword = "";
+
+  // 正しいメールアドレスの形式
+  private validEmail =
+    /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/;
 
   /**
    * 入力されたメールアドレスとパスワードをfirebaseに渡して処理を行う.
    */
   signup(): void {
+    // エラーメッセージの初期化
+    this.errorEmail = "";
+    this.errorPassword = "";
+
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, this.email, this.password)
       .then((userCredential) => {
@@ -57,16 +75,37 @@ export default class Signup extends Vue {
         console.log("errorCode" + errorCode);
         console.log("errorMessage" + errorMessage);
       });
+
+    // メールアドレスのエラーチェック
+    if (this.email === "") {
+      this.errorEmail = "メールアドレスを入力してください";
+    } else if (this.validEmail.test(this.email)) {
+      // パターンにマッチした場合
+      this.errorEmail = "";
+    } else {
+      // パターンにマッチしない場合
+      this.errorEmail =
+        "メールアドレスの形式で入力してください（例）email@book.jp";
+    }
+
+    // パスワードのエラーチェック
+    if (this.password === "") {
+      this.errorPassword = "パスワードを入力してください";
+    } else if (this.password.length < 6) {
+      this.errorPassword = "パスワードは6文字以上で入力してください";
+    }
   }
 }
 </script>
 
 <style scoped>
+.registrationForm {
+  margin-top: auto;
+}
+
 .errorMsg {
   color: red;
   text-align: center;
-  margin-bottom: 15px;
-  font-size: 20px;
 }
 
 .registration {
@@ -76,7 +115,7 @@ export default class Signup extends Vue {
 }
 .msg {
   padding-top: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 form {
   background-color: #f8f7ef;
@@ -100,5 +139,8 @@ button {
   width: 100px;
   background-color: #f25371;
   margin-top: 12px;
+}
+button:hover {
+  background-color: #f58394;
 }
 </style>
