@@ -54,7 +54,7 @@ export default class Signup extends Vue {
     /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/;
 
   /**
-   * 入力されたメールアドレスとパスワードをfirebaseに渡して処理を行う.
+   * createUserWithEmailAndPasswordに入力されたメールアドレスとパスワードを渡して会員登録処理を行う.
    */
   signup(): void {
     // エラーメッセージの初期化
