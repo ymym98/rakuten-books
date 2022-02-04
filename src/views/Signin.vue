@@ -22,6 +22,11 @@
           />
         </div>
         <button type="button" @click="signin"><span>ログイン</span></button>
+        <div>
+          <router-link to="/signup"
+            >はじめてご利用になる方はこちら
+          </router-link>
+        </div>
       </div>
     </form>
   </div>
@@ -89,9 +94,9 @@ export default class Signin extends Vue {
 </script>
 
 <style scoped>
-/* .registrationForm {
+.registrationForm {
   margin-top: auto;
-} */
+}
 
 .errorMsg {
   color: red;
@@ -127,10 +132,10 @@ button {
   color: white;
   border-radius: 4px;
   width: 100px;
-  background-color: #f25371;
+  background-color: #0085cd;
   margin-top: 12px;
 }
 button:hover {
-  background-color: #f58394;
+  background-color: #62a6d5;
 }
 </style>
