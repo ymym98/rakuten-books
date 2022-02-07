@@ -65,7 +65,7 @@ export default class Signin extends Vue {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("ユーザー情報：" + JSON.stringify(user));
-        this.$router.push("/booklist");
+        this.$router.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;

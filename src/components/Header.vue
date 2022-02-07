@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="icon_btn">
-      <router-link to="/bookList">
+      <router-link to="/">
         <img class="icon" src="/img/yumi_book.png" />
       </router-link>
     </div>

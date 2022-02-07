@@ -17,7 +17,7 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Signup.vue"),
   },
   {
-    path: "/bookList",
+    path: "/",
     component: () => import("../views/Books.vue"),
   },
 ];
