@@ -5,6 +5,10 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
+    path: "/itemDetail/:isbn",
+    component: () => import("../views/ItemDetail.vue"),
+  },
+  {
     path: "/signin",
     component: () => import("../views/Signin.vue"),
   },
