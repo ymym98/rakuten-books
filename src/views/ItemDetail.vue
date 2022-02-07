@@ -15,10 +15,27 @@
             <span id="name">著者</span>{{ " " + currentBook.author }}
           </div>
           <div class="bookCaption">{{ currentBook.itemCaption }}</div>
-          <div class="bookPrice">
-            <span>税込</span>
-            <span id="price">{{ currentBook.itemPrice }}</span>
-            <span>円</span>
+          <div class="shareButton">
+            <div class="bookPrice">
+              <span>税込</span>
+              <span id="price">{{
+                currentBook.itemPrice.toLocaleString()
+              }}</span>
+              <span>円</span>
+            </div>
+            <ShareNetwork
+              network="twitter"
+              :url="currentBook.itemUrl"
+              :title="'『' + currentBook.title + '』'"
+            >
+              <div>
+                <v-icon
+                  ><img
+                    class="twitterIcon"
+                    src="/img/icons8-twitter-squared-48.png"
+                /></v-icon>
+              </div>
+            </ShareNetwork>
           </div>
           <div class="addCart">
             <button type="button">カートに入れる</button>
@@ -31,7 +48,6 @@
 
 <script lang="ts">
 import { Book } from "@/types/Book";
-// import axios from "axios";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
@@ -70,6 +86,17 @@ export default class ItemDetail extends Vue {
 </script>
 
 <style scoped>
+.shareButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.twitterIcon {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+}
+
 .addCart {
   text-align: center;
   margin-top: 20px;
