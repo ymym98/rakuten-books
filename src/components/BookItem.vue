@@ -2,7 +2,9 @@
   <div class="bookItem">
     <ul v-for="book of bookList" v-bind:key="book.isbn">
       <li>
-        <img v-bind:src="book.mediumImageUrl" />
+        <router-link v-bind:to="'/itemDetail/' + book.isbn">
+          <img v-bind:src="book.mediumImageUrl"
+        /></router-link>
       </li>
     </ul>
   </div>
@@ -20,7 +22,7 @@ export default class BookItem extends Vue {
   async created(): Promise<void> {
     await this.$store.dispatch("getBookList");
     this.bookList = this.$store.getters.getBookList;
-    // console.dir("bookList:" + JSON.stringify(this.bookList));
+    console.dir("bookList:" + JSON.stringify(this.bookList));
   }
 }
 </script>
