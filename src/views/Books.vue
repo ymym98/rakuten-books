@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ name + "さん" }}
     <div class="bookshelf">
       <book-item class="itemShelf"> </book-item>
     </div>
@@ -13,7 +14,9 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   components: { BookItem },
 })
-export default class Books extends Vue {}
+export default class Books extends Vue {
+  private name = this.$store.getters.getLoginUserName;
+}
 </script>
 
 <style scoped>

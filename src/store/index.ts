@@ -13,6 +13,8 @@ export default new Vuex.Store({
     login: false,
     // ログインしているユーザーのメールアドレス
     loginEmail: "",
+    // ログインしているユーザーの名前
+    loginName: "",
   },
   mutations: {
     /**
@@ -55,6 +57,9 @@ export default new Vuex.Store({
       state.login = true;
       state.loginEmail = payload;
     },
+    loginUserName(state, payload) {
+      state.loginName = payload;
+    },
   },
   actions: {
     /**
@@ -86,6 +91,9 @@ export default new Vuex.Store({
      */
     getLoginFlag(state) {
       return state.login;
+    },
+    getLoginUserName(state) {
+      return state.loginName;
     },
   },
   modules: {},

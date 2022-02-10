@@ -123,6 +123,7 @@ import axios from "axios";
 // import { initializeApp } from "firebase/app";
 // import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
+import { directive } from "vue/types/umd";
 
 @Component
 export default class Signup extends Vue {
@@ -191,6 +192,7 @@ export default class Signup extends Vue {
         zipCode: this.zipCode,
         address: this.selected + this.municipality + this.buildingName,
       });
+
       alert("会員登録に成功しました！");
       this.$store.commit("login");
       this.$router.push("/");
@@ -267,7 +269,6 @@ export default class Signup extends Vue {
         zipcode: this.zipCode,
       },
     });
-    console.dir(JSON.stringify(response));
     // 都道府県を自動で選択
     this.selected = response.data.items[0].pref;
     // 市区町村を自動で入力
