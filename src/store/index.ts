@@ -9,6 +9,10 @@ export default new Vuex.Store({
   state: {
     // 楽天ブックス書籍検索一覧を格納する配列
     books: new Array<Book>(),
+    // ログイン状態
+    login: false,
+    // ログインしているユーザーのメールアドレス
+    loginEmail: "",
   },
   mutations: {
     /**
@@ -42,6 +46,15 @@ export default new Vuex.Store({
         );
       }
     },
+    /**
+     * ログインする.
+     * @param state ステート
+     * @param payload ログイン中のユーザーのメールアドレス
+     */
+    login(state, payload) {
+      state.login = true;
+      state.loginEmail = payload;
+    },
   },
   actions: {
     /**
@@ -65,6 +78,14 @@ export default new Vuex.Store({
      */
     getBookList(state) {
       return state.books;
+    },
+    /**
+     * ログイン状況の取得.
+     * @param state ステート
+     * @returns ログイン状況
+     */
+    getLoginFlag(state) {
+      return state.login;
     },
   },
   modules: {},
