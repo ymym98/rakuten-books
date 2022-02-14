@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     // 楽天ブックス書籍検索一覧を格納する配列
     books: new Array<Book>(),
-    // ログイン状態
+    // ログイン状態(true←ログイン, false←ログインしていない)
     login: false,
     // ログインしているユーザーのメールアドレス
     loginEmail: "",
@@ -94,6 +94,9 @@ export default new Vuex.Store({
     },
     getLoginUserName(state) {
       return state.loginName;
+    },
+    getLoginEmail(state) {
+      return state.loginEmail;
     },
   },
   modules: {},
