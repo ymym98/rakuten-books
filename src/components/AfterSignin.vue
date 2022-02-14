@@ -18,7 +18,6 @@ import { Component, Vue } from "vue-property-decorator";
 export default class AfterSignin extends Vue {
   get getLoginUserName(): string {
     console.log("ユーザー名：" + this.$store.getters.getLoginUserName);
-
     return this.$store.getters.getLoginUserName;
   }
 }

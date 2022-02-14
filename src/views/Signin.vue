@@ -34,8 +34,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app, db } from "@/config/firebase-config";
+import { db } from "@/config/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
