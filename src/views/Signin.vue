@@ -35,60 +35,50 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "@/config/firebase-config";
+import { app, db } from "@/config/firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 
 @Component
 export default class Signin extends Vue {
   // メールアドレス
   private email = "";
-
   // パスワード
   private password = "";
-
   // ログインに失敗した際のエラーメッセージ
   private errorSignin = "";
-
   // メールアドレスのエラーメッセージ
   private errorEmail = "";
-
   // パスワードのエラーメッセージ
   private errorPassword = "";
 
   /**
-   * signInWithEmailAndPasswordに入力されたメールアドレスとパスワードを渡してログインの処理を行う.
+   * ログイン情報を送る.
    */
-  signin(): void {
+  async signin(): Promise<void> {
+    // エラーメッセージを初期化
     this.errorEmail = "";
     this.errorPassword = "";
+
+    // firebase authでログイン認証を行う.
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, this.email, this.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("ユーザー情報：" + JSON.stringify(user));
+        this.$store.commit("login");
+        alert("ログイン成功");
         this.$router.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // 入力欄が空の状態でログインボタンを押したらメールアドレスとパスワードのエラーメッセージのみ表示させる
-        if (this.email === "" || this.password === "") {
-          this.errorSignin = "";
-        } else {
-          this.errorSignin =
-            "入力した会員ID(メールアドレス)またはパスワードが間違っています。";
-        }
-        console.log("errorCode" + errorCode);
-        console.log("errorMessage" + errorMessage);
+        console.log(errorCode);
+        console.log(errorMessage);
+        this.errorSignin = "ログインできませんでした";
       });
-
-    // メールアドレスのエラーチェック
-    if (this.email === "") {
-      this.errorEmail = "メールアドレスを入力してください";
-    }
-    // パスワードのエラーチェック
-    if (this.password === "") {
-      this.errorPassword = "パスワードを入力してください";
-    }
+    // ドキュメントを取得する.
+    const docRef = doc(db, "users", this.email);
+    const docSnap = await getDoc(docRef);
+    console.log("docSnap:" + JSON.stringify(docSnap));
   }
 }
 </script>
