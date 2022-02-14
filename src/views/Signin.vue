@@ -37,6 +37,8 @@ import { Component, Vue } from "vue-property-decorator";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app, db } from "@/config/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 @Component
 export default class Signin extends Vue {
@@ -58,27 +60,22 @@ export default class Signin extends Vue {
     // エラーメッセージを初期化
     this.errorEmail = "";
     this.errorPassword = "";
-
-    // firebase authでログイン認証を行う.
-    const auth = getAuth(app);
-    signInWithEmailAndPassword(auth, this.email, this.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        this.$store.commit("login");
-        alert("ログイン成功");
-        this.$router.push("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-        this.errorSignin = "ログインできませんでした";
-      });
-    // ドキュメントを取得する.
-    const docRef = doc(db, "users", this.email);
-    const docSnap = await getDoc(docRef);
-    console.log("docSnap:" + JSON.stringify(docSnap));
+    try {
+      // Firebase authでログインを承認する
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password);
+      // ドキュメントを取得する.
+      const docRef = doc(db, "users", this.email);
+      const docSnap = await getDoc(docRef);
+      this.$store.commit("login", this.email);
+      this.$store.commit("loginUserName", docSnap.data()?.name);
+      alert("ログイン成功");
+      this.$router.push("/");
+    } catch (error) {
+      console.log(error);
+      this.errorSignin = "ログインできませんでした";
+    }
   }
 }
 </script>
