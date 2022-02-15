@@ -58,6 +58,20 @@ export default new Vuex.Store({
       state.login = true;
       state.loginEmail = payload;
     },
+    /**
+     * ログアウトする.
+     * @param state ステート
+     */
+    logout(state) {
+      state.login = false;
+      state.loginEmail = "";
+    },
+
+    /**
+     * ログインユーザーの名前を渡す.
+     * @param state ステート
+     * @param payload ログインユーザーの名前
+     */
     loginUserName(state, payload) {
       state.loginName = payload;
     },
