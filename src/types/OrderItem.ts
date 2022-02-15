@@ -1,5 +1,8 @@
 import { Book } from "./Book";
 
+/**
+ * 注文商品を表す部品用クラスを作成.
+ */
 export class OrderItem {
   constructor(
     // 商品のISBNコード
