@@ -3,9 +3,9 @@
     <ul>
       <li>
         <div class="name">{{ getLoginUserName + "さん" }}</div>
-        <router-link to="/">
-          <img class="icon" src="/img/user.png" />
-        </router-link>
+        <!-- <router-link to="/"> -->
+        <img class="icon" src="/img/user.png" />
+        <!-- </router-link> -->
       </li>
     </ul>
   </div>
@@ -34,7 +34,7 @@ ul {
 }
 li {
   list-style: none;
-  margin: 2px;
+  /* margin: 2px; */
   box-sizing: border-box;
   text-align: center;
 }
