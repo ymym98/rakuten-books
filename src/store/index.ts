@@ -1,4 +1,5 @@
 import { Book } from "@/types/Book";
+import { OrderItem } from "@/types/OrderItem";
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
@@ -16,6 +17,8 @@ export default new Vuex.Store({
     loginEmail: "",
     // ログインしているユーザーの名前
     loginName: "",
+    // カートに入っている商品情報
+    cartList: new Array<OrderItem>(),
   },
   mutations: {
     /**
@@ -130,8 +133,8 @@ export default new Vuex.Store({
       key: "vuex",
       // ストレージの種類を規定
       storage: window.sessionStorage,
-      // ログイン状況、ログインユーザーのメールアドレス、ログインユーザーの名前を保持
-      paths: ["login", "loginEmail", "loginName"],
+      // ログイン状況、ログインユーザーのメールアドレス、ログインユーザーの名前、カートリストを保持
+      paths: ["login", "loginEmail", "loginName", "cartList"],
     }),
   ],
   modules: {},
