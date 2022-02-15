@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>カートリスト</div>
 </template>
 
 <script lang="ts">

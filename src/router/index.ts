@@ -5,6 +5,10 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
+    path: "/cartList",
+    component: () => import("../views/CartList.vue"),
+  },
+  {
     path: "/itemDetail/:isbn",
     component: () => import("../views/ItemDetail.vue"),
   },

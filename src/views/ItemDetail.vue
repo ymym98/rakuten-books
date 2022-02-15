@@ -38,7 +38,7 @@
             </ShareNetwork>
           </div>
           <div class="addCart">
-            <button type="button">カートに入れる</button>
+            <button type="button" @click="addCartList">カートに入れる</button>
           </div>
         </div>
       </div>
@@ -81,6 +81,10 @@ export default class ItemDetail extends Vue {
       ({ isbn }: { isbn: string }) => isbn === this.$route.params.isbn
     );
     console.log("現在の配列情報：" + JSON.stringify(this.currentBook));
+  }
+
+  addCartList(): void {
+    this.$router.push("/cartList");
   }
 }
 </script>
