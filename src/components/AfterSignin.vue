@@ -3,9 +3,9 @@
     <ul>
       <li>
         <div class="name">{{ getLoginUserName + "さん" }}</div>
-        <router-link to="/">
-          <img class="icon" src="/img/user.png" />
-        </router-link>
+        <!-- <router-link to="/"> -->
+        <img class="icon" src="/img/user.png" />
+        <!-- </router-link> -->
       </li>
     </ul>
   </div>
@@ -16,6 +16,9 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class AfterSignin extends Vue {
+  /**
+   * ログインしたユーザーの名前を取得する.
+   */
   get getLoginUserName(): string {
     console.log("ユーザー名：" + this.$store.getters.getLoginUserName);
     return this.$store.getters.getLoginUserName;
@@ -31,7 +34,7 @@ ul {
 }
 li {
   list-style: none;
-  margin: 2px;
+  /* margin: 2px; */
   box-sizing: border-box;
   text-align: center;
 }
