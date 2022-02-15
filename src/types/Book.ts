@@ -4,37 +4,37 @@
 export class Book {
   constructor(
     // ISBNコード
-    private _isbn: number,
+    public _isbn: number,
     // 著者
-    private _author: string,
+    public _author: string,
     // 著者カナ
-    private _authorKana: string,
+    public _authorKana: string,
     // 商品説明文
-    private _itemCaption: string,
+    public _itemCaption: string,
     // 価格
-    private _itemPrice: number,
+    public _itemPrice: number,
     // 商品URL
-    private _itemUrl: string,
+    public _itemUrl: string,
     // 商品画像(大)
-    private _largeImageUrl: string,
+    public _largeImageUrl: string,
     // 商品画像(中)
-    private _mediumImageUrl: string,
+    public _mediumImageUrl: string,
     // 出版社
-    private _publisherName: string,
+    public _publisherName: string,
     // 発売日
-    private _salesDate: string,
+    public _salesDate: string,
     // サイズ
-    private _size: string,
+    public _size: string,
     // 商品画像(小)
-    private _smallImageUrl: string,
+    public _smallImageUrl: string,
     // サブタイトル
-    private _subTitle: string,
+    public _subTitle: string,
     // サブタイトルカナ
-    private _subTitleKana: string,
+    public _subTitleKana: string,
     // タイトル
-    private _title: string,
+    public _title: string,
     // タイトルカナ
-    private _titleKana: string
+    public _titleKana: string
   ) {}
 
   public get isbn(): number {
