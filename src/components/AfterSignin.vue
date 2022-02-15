@@ -16,6 +16,9 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class AfterSignin extends Vue {
+  /**
+   * ログインしたユーザーの名前を取得する.
+   */
   get getLoginUserName(): string {
     console.log("ユーザー名：" + this.$store.getters.getLoginUserName);
     return this.$store.getters.getLoginUserName;

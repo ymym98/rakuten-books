@@ -2,6 +2,7 @@ import { Book } from "@/types/Book";
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -92,12 +93,32 @@ export default new Vuex.Store({
     getLoginFlag(state) {
       return state.login;
     },
+    /**
+     * ログインしたユーザーの名前の取得.
+     * @param state ステート
+     * @returns ログインユーザーの名前
+     */
     getLoginUserName(state) {
       return state.loginName;
     },
+    /**
+     * ログインしたユーザーのメールアドレスの取得.
+     * @param state ステート
+     * @returns ログインユーザーのメールアドレス
+     */
     getLoginEmail(state) {
       return state.loginEmail;
     },
   },
+  plugins: [
+    createPersistedState({
+      // ストレージのキーを指定
+      key: "vuex",
+      // ストレージの種類を規定
+      storage: window.sessionStorage,
+      // ログイン状況、ログインユーザーのメールアドレス、ログインユーザーの名前を保持
+      paths: ["login", "loginEmail", "loginName"],
+    }),
+  ],
   modules: {},
 });
