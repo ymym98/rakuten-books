@@ -34,7 +34,6 @@ export default new Vuex.Store({
           new Book(
             item.Item.isbn,
             item.Item.author,
-            item.Item.authorKana,
             item.Item.itemCaption,
             item.Item.itemPrice,
             item.Item.itemUrl,
@@ -42,16 +41,22 @@ export default new Vuex.Store({
             item.Item.mediumImageUrl,
             item.Item.publisherName,
             item.Item.salesDate,
-            item.Item.size,
             item.Item.smallImageUrl,
             item.Item.subTitle,
-            item.Item.subTitleKana,
-            item.Item.title,
-            item.Item.titleKana
+            item.Item.title
           )
         );
       }
     },
+    /**
+     * カートリストに商品を追加する
+     * @param state ステート
+     * @param payload カートに入れた商品情報
+     */
+    addCartList(state, payload) {
+      state.cartList.push(payload);
+    },
+
     /**
      * ログインする.
      * @param state ステート
@@ -102,6 +107,40 @@ export default new Vuex.Store({
     getBookList(state) {
       return state.books;
     },
+
+    /**
+     * stateのcartList情報を返す.
+     * @param state ステート
+     * @returns カートリスト情報
+     */
+    getCartList(state) {
+      const orderItemArray = new Array<OrderItem>();
+      for (const item of state.cartList) {
+        orderItemArray.push(
+          new OrderItem(
+            item._isbn,
+            item._orderId,
+            item._quantity,
+            new Book(
+              item.isbn,
+              item._book._author,
+              item._book._itemCaption,
+              item._book._itemPrice,
+              item._book._itemUrl,
+              item._book._largeImageUrl,
+              item._book._mediumImageUrl,
+              item._book._publisherName,
+              item._book._salesDate,
+              item._book._smallImageUrl,
+              item._book._subTitle,
+              item._book._title
+            )
+          )
+        );
+      }
+      return orderItemArray;
+    },
+
     /**
      * ログイン状況の取得.
      * @param state ステート

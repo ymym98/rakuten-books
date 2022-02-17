@@ -7,34 +7,26 @@ export class Book {
     public _isbn: number,
     // 著者
     public _author: string,
-    // 著者カナ
-    public _authorKana: string,
-    // 商品説明文
+    // 商品説明
     public _itemCaption: string,
     // 価格
     public _itemPrice: number,
     // 商品URL
     public _itemUrl: string,
-    // 商品画像(大)
+    // 画像イメージ（大）
     public _largeImageUrl: string,
-    // 商品画像(中)
+    // 画像イメージ（中）
     public _mediumImageUrl: string,
     // 出版社
     public _publisherName: string,
     // 発売日
     public _salesDate: string,
-    // サイズ
-    public _size: string,
-    // 商品画像(小)
+    // 画像イメージ（小）
     public _smallImageUrl: string,
     // サブタイトル
     public _subTitle: string,
-    // サブタイトルカナ
-    public _subTitleKana: string,
     // タイトル
-    public _title: string,
-    // タイトルカナ
-    public _titleKana: string
+    public _title: string
   ) {}
 
   public get isbn(): number {
@@ -51,14 +43,6 @@ export class Book {
 
   public set author(author: string) {
     this._author = author;
-  }
-
-  public get authorKana(): string {
-    return this._authorKana;
-  }
-
-  public set authorKana(authorKana: string) {
-    this._authorKana = authorKana;
   }
 
   public get itemCaption(): string {
@@ -117,14 +101,6 @@ export class Book {
     this._salesDate = salesDate;
   }
 
-  public get size(): string {
-    return this._size;
-  }
-
-  public set size(size: string) {
-    this._size = size;
-  }
-
   public get smallImageUrl(): string {
     return this._smallImageUrl;
   }
@@ -141,27 +117,11 @@ export class Book {
     this._subTitle = subTitle;
   }
 
-  public get subTitleKana(): string {
-    return this._subTitleKana;
-  }
-
-  public set subTitleKana(subTitleKana: string) {
-    this._subTitleKana = subTitleKana;
-  }
-
   public get title(): string {
     return this._title;
   }
 
   public set title(title: string) {
     this._title = title;
-  }
-
-  public get titleKana(): string {
-    return this._titleKana;
-  }
-
-  public set titleKana(titleKana: string) {
-    this._titleKana = titleKana;
   }
 }

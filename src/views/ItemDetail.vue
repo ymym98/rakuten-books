@@ -23,7 +23,7 @@
               }}</span>
               <span>円</span>
             </div>
-            <ShareNetwork
+            <!-- <ShareNetwork
               network="twitter"
               :url="currentBook.itemUrl"
               :title="'『' + currentBook.title + '』'"
@@ -35,7 +35,7 @@
                     src="/img/icons8-twitter-squared-48.png"
                 /></v-icon>
               </div>
-            </ShareNetwork>
+            </ShareNetwork> -->
           </div>
           <div class="addCart">
             <button type="button" @click="addCartList">カートに入れる</button>
@@ -48,42 +48,48 @@
 
 <script lang="ts">
 import { Book } from "@/types/Book";
+import { OrderItem } from "@/types/OrderItem";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ItemDetail extends Vue {
+  // 選択された商品の個数
+  private quantity = 1;
   // 選択された商品情報
-  private currentBook = new Book(
-    0,
-    "",
-    "",
-    "",
-    0,
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-  );
+  private currentBook = new Book(0, "", "", 0, "", "", "", "", "", "", "", "");
   /**
    * 選択した商品の詳細情報を取得.
    */
   async created(): Promise<void> {
-    this.$store.dispatch("getBookList");
+    await this.$store.dispatch("getBookList");
     // currentBookのisbnコードとurlのisbnコードが一致するものを探す
-    this.currentBook = this["$store"].getters.getBookList.find(
+    this.currentBook = this.$store.getters.getBookList.find(
       ({ isbn }: { isbn: string }) => isbn === this.$route.params.isbn
     );
+
     console.log("現在の配列情報：" + JSON.stringify(this.currentBook));
+    console.log("isbn:" + JSON.stringify(this.currentBook.isbn));
   }
 
+  /**
+   * カートに商品を追加する.
+   */
   addCartList(): void {
+    // 注文IDはカートリストに入っている商品数+1をする
+    const orderId = this.$store.getters.getCartList.length + 1;
+
+    // vuexに情報を保存する
+    this.$store.commit(
+      "addCartList",
+      new OrderItem(
+        this.currentBook.isbn,
+        orderId,
+        this.quantity,
+        this.currentBook
+      )
+    );
+
+    // カートリストに画面遷移
     this.$router.push("/cartList");
   }
 }
