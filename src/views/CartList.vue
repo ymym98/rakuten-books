@@ -113,6 +113,7 @@ export default class CartList extends Vue {
 }
 table {
   border: solid;
+  border-color: gainsboro;
   margin-left: auto;
   margin-right: auto;
 }
@@ -136,6 +137,7 @@ h1 {
 }
 .itemTitle {
   font-size: 18px;
+  font-weight: 400;
 }
 .totalPrice {
   text-align: center;
