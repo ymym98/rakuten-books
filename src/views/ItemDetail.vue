@@ -23,7 +23,7 @@
               }}</span>
               <span>円</span>
             </div>
-            <ShareNetwork
+            <!-- <ShareNetwork
               network="twitter"
               :url="currentBook.itemUrl"
               :title="'『' + currentBook.title + '』'"
@@ -35,10 +35,26 @@
                     src="/img/icons8-twitter-squared-48.png"
                 /></v-icon>
               </div>
-            </ShareNetwork>
+            </ShareNetwork> -->
           </div>
           <div class="addCart">
-            <button type="button">カートに入れる</button>
+            <div>
+              <button type="button" @click="addCartList">カートに入れる</button>
+            </div>
+            <div>
+              <select name="quantity" v-model="quantity">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -48,44 +64,61 @@
 
 <script lang="ts">
 import { Book } from "@/types/Book";
+import { OrderItem } from "@/types/OrderItem";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ItemDetail extends Vue {
+  // 選択された商品の個数
+  private quantity = 1;
   // 選択された商品情報
-  private currentBook = new Book(
-    0,
-    "",
-    "",
-    "",
-    0,
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-  );
+  private currentBook = new Book(0, "", "", 0, "", "", "", "", "", "", "", "");
   /**
    * 選択した商品の詳細情報を取得.
    */
   async created(): Promise<void> {
-    this.$store.dispatch("getBookList");
+    await this.$store.dispatch("getBookList");
     // currentBookのisbnコードとurlのisbnコードが一致するものを探す
-    this.currentBook = this["$store"].getters.getBookList.find(
+    this.currentBook = this.$store.getters.getBookList.find(
       ({ isbn }: { isbn: string }) => isbn === this.$route.params.isbn
     );
+
     console.log("現在の配列情報：" + JSON.stringify(this.currentBook));
+    console.log("isbn:" + JSON.stringify(this.currentBook.isbn));
+  }
+
+  /**
+   * カートに商品を追加する.
+   */
+  addCartList(): void {
+    // 注文IDはカートリストに入っている商品数+1をする
+    const orderId = this.$store.getters.getCartList.length + 1;
+
+    // vuexに情報を保存する
+    this.$store.commit(
+      "addCartList",
+      new OrderItem(
+        this.currentBook.isbn,
+        orderId,
+        this.quantity,
+        this.currentBook
+      )
+    );
+
+    // カートリストに画面遷移
+    this.$router.push("/cartList");
   }
 }
 </script>
 
 <style scoped>
+select {
+  height: 35px;
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+
 .shareButton {
   display: flex;
   justify-content: flex-end;
@@ -100,6 +133,8 @@ export default class ItemDetail extends Vue {
 .addCart {
   text-align: center;
   margin-top: 20px;
+  display: flex;
+  margin-left: 30px;
 }
 .addCart button {
   width: 400px;
@@ -110,6 +145,9 @@ export default class ItemDetail extends Vue {
   border-radius: 4px;
   padding: 10px;
   border: unset;
+}
+.addCart button:hover {
+  background-color: #94ce70;
 }
 
 .bookPrice {

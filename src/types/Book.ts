@@ -4,37 +4,29 @@
 export class Book {
   constructor(
     // ISBNコード
-    private _isbn: number,
+    public _isbn: number,
     // 著者
-    private _author: string,
-    // 著者カナ
-    private _authorKana: string,
-    // 商品説明文
-    private _itemCaption: string,
+    public _author: string,
+    // 商品説明
+    public _itemCaption: string,
     // 価格
-    private _itemPrice: number,
+    public _itemPrice: number,
     // 商品URL
-    private _itemUrl: string,
-    // 商品画像(大)
-    private _largeImageUrl: string,
-    // 商品画像(中)
-    private _mediumImageUrl: string,
+    public _itemUrl: string,
+    // 画像イメージ（大）
+    public _largeImageUrl: string,
+    // 画像イメージ（中）
+    public _mediumImageUrl: string,
     // 出版社
-    private _publisherName: string,
+    public _publisherName: string,
     // 発売日
-    private _salesDate: string,
-    // サイズ
-    private _size: string,
-    // 商品画像(小)
-    private _smallImageUrl: string,
+    public _salesDate: string,
+    // 画像イメージ（小）
+    public _smallImageUrl: string,
     // サブタイトル
-    private _subTitle: string,
-    // サブタイトルカナ
-    private _subTitleKana: string,
+    public _subTitle: string,
     // タイトル
-    private _title: string,
-    // タイトルカナ
-    private _titleKana: string
+    public _title: string
   ) {}
 
   public get isbn(): number {
@@ -51,14 +43,6 @@ export class Book {
 
   public set author(author: string) {
     this._author = author;
-  }
-
-  public get authorKana(): string {
-    return this._authorKana;
-  }
-
-  public set authorKana(authorKana: string) {
-    this._authorKana = authorKana;
   }
 
   public get itemCaption(): string {
@@ -117,14 +101,6 @@ export class Book {
     this._salesDate = salesDate;
   }
 
-  public get size(): string {
-    return this._size;
-  }
-
-  public set size(size: string) {
-    this._size = size;
-  }
-
   public get smallImageUrl(): string {
     return this._smallImageUrl;
   }
@@ -141,27 +117,11 @@ export class Book {
     this._subTitle = subTitle;
   }
 
-  public get subTitleKana(): string {
-    return this._subTitleKana;
-  }
-
-  public set subTitleKana(subTitleKana: string) {
-    this._subTitleKana = subTitleKana;
-  }
-
   public get title(): string {
     return this._title;
   }
 
   public set title(title: string) {
     this._title = title;
-  }
-
-  public get titleKana(): string {
-    return this._titleKana;
-  }
-
-  public set titleKana(titleKana: string) {
-    this._titleKana = titleKana;
   }
 }
