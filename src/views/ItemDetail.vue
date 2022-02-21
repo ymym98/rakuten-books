@@ -39,6 +39,9 @@
           </div>
           <div class="addCart">
             <div>
+              <button type="button" @click="addCartList">カートに入れる</button>
+            </div>
+            <div>
               <select name="quantity" v-model="quantity">
                 <option value="1" selected>1</option>
                 <option value="2">2</option>
@@ -51,9 +54,6 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
               </select>
-            </div>
-            <div>
-              <button type="button" @click="addCartList">カートに入れる</button>
             </div>
           </div>
         </div>
@@ -112,6 +112,13 @@ export default class ItemDetail extends Vue {
 </script>
 
 <style scoped>
+select {
+  height: 35px;
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+
 .shareButton {
   display: flex;
   justify-content: flex-end;
@@ -127,6 +134,7 @@ export default class ItemDetail extends Vue {
   text-align: center;
   margin-top: 20px;
   display: flex;
+  margin-left: 30px;
 }
 .addCart button {
   width: 400px;
@@ -137,6 +145,9 @@ export default class ItemDetail extends Vue {
   border-radius: 4px;
   padding: 10px;
   border: unset;
+}
+.addCart button:hover {
+  background-color: #94ce70;
 }
 
 .bookPrice {
