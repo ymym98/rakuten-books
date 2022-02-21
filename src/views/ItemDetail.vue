@@ -38,7 +38,23 @@
             </ShareNetwork> -->
           </div>
           <div class="addCart">
-            <button type="button" @click="addCartList">カートに入れる</button>
+            <div>
+              <select name="quantity" v-model="quantity">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div>
+              <button type="button" @click="addCartList">カートに入れる</button>
+            </div>
           </div>
         </div>
       </div>
@@ -110,6 +126,7 @@ export default class ItemDetail extends Vue {
 .addCart {
   text-align: center;
   margin-top: 20px;
+  display: flex;
 }
 .addCart button {
   width: 400px;

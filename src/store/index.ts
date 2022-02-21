@@ -58,6 +58,15 @@ export default new Vuex.Store({
     },
 
     /**
+     *
+     * @param state ステート
+     * @param index 配列のインデックス番号
+     */
+    deleteCartListItem(state, index) {
+      state.cartList.splice(index, 1);
+    },
+
+    /**
      * ログインする.
      * @param state ステート
      * @param payload ログイン中のユーザーのメールアドレス

@@ -123,7 +123,7 @@ import axios from "axios";
 // import { initializeApp } from "firebase/app";
 // import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
-import { directive } from "vue/types/umd";
+// import { directive } from "vue/types/umd";
 
 @Component
 export default class Signup extends Vue {
