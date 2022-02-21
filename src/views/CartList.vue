@@ -55,7 +55,9 @@
       </div>
     </div>
     <div class="goOrder">
-      <button class="goOrderButton" type="button">購入手続きへ進む</button>
+      <router-link to="/orderConfirm">
+        <button class="goOrderButton" type="button">購入手続きへ進む</button>
+      </router-link>
     </div>
   </div>
 </template>
