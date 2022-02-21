@@ -36,7 +36,11 @@
               }}
             </td>
             <td align="center">
-              <button type="button" v-on:click="deleteCartListItem(index)">
+              <button
+                class="deleteButton"
+                type="button"
+                v-on:click="deleteCartListItem(index)"
+              >
                 カートから削除
               </button>
             </td>
@@ -49,6 +53,9 @@
           getTotalPrice.toLocaleString() + "円"
         }}</span>
       </div>
+    </div>
+    <div class="goOrder">
+      <button class="goOrderButton" type="button">購入手続きへ進む</button>
     </div>
   </div>
 </template>
@@ -137,5 +144,28 @@ h1 {
 .totalPriceColor {
   color: #f11e46;
   font-weight: bold;
+}
+.goOrder {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.goOrderButton {
+  width: 200px;
+  height: 45px;
+  font-size: 16px;
+  color: white;
+  background-color: #64bb30;
+  border-radius: 4px;
+  padding: 10px;
+  border: unset;
+  margin-bottom: 15px;
+}
+.goOrderButton:hover {
+  background-color: #94ce70;
+}
+
+.deleteButton {
+  margin-right: 10px;
 }
 </style>
