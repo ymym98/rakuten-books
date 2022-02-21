@@ -1,5 +1,7 @@
 <template>
-  <div>注文確認</div>
+  <div>
+    <h1>注文確認</h1>
+  </div>
 </template>
 
 <script lang="ts">
