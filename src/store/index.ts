@@ -1,5 +1,6 @@
 import { Book } from "@/types/Book";
 import { OrderItem } from "@/types/OrderItem";
+import { User } from "@/types/User";
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
@@ -19,6 +20,8 @@ export default new Vuex.Store({
     loginName: "",
     // カートに入っている商品情報
     cartList: new Array<OrderItem>(),
+    // ログインユーザーの情報
+    userInfo: new User("", "", "", "", ""),
   },
   mutations: {
     /**
@@ -58,6 +61,14 @@ export default new Vuex.Store({
     },
 
     /**
+     * 注文が完了し、カートリストの商品を空にする.
+     * @param state ステート
+     */
+    resetCartList(state) {
+      state.cartList = new Array<OrderItem>();
+    },
+
+    /**
      *
      * @param state ステート
      * @param index 配列のインデックス番号
@@ -91,6 +102,16 @@ export default new Vuex.Store({
      */
     loginUserName(state, payload) {
       state.loginName = payload;
+    },
+
+    loginUserInfo(state, user) {
+      state.userInfo = new User(
+        user._address,
+        user._email,
+        user._name,
+        user._password,
+        user._zipCode
+      );
     },
   },
   actions: {
