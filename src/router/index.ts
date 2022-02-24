@@ -5,6 +5,10 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
+    path: "/orderConfirm",
+    component: () => import("../views/OrderConfirm.vue"),
+  },
+  {
     path: "/cartList",
     component: () => import("../views/CartList.vue"),
   },

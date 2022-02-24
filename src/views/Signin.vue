@@ -67,8 +67,17 @@ export default class Signin extends Vue {
       // ドキュメントを取得する.
       const docRef = doc(db, "users", this.email);
       const docSnap = await getDoc(docRef);
+      console.log("ユーザー情報：" + JSON.stringify(docSnap));
+
       this.$store.commit("login", this.email);
       this.$store.commit("loginUserName", docSnap.data()?.name);
+      this.$store.commit("loginUserInfo", docSnap.data()?.address);
+      // console.log("墓ぎゃー：" + this.$store.state.loginName);
+      //↑これは出たからstateが表示できないわけではない。firestoreから情報を取得しなくては
+
+      // this.$store.commit("loginUserInfo", docSnap.data()?.users);
+      console.log("ウエー：" + JSON.stringify(this.$store.state.userInfo));
+
       alert("ログイン成功");
       this.$router.push("/");
     } catch (error) {
