@@ -263,7 +263,7 @@ export default class OrderConfirm extends Vue {
       );
     }
     this.$store.commit("resetCartList");
-    console.log("カートリスト:" + JSON.stringify(this.cartList));
+    this.$router.push("/orderComplete");
   }
 
   /**

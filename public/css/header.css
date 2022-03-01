@@ -8,7 +8,6 @@ header {
   width: 1440px;
   height: 127px;
   background-color: #f3f1e4;
-  margin-bottom: 200px;
   display: flex;
   position: fixed;
   z-index: 10;
