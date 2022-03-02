@@ -7,6 +7,11 @@
         <button type="button">商品一覧ページにもどる</button>
       </router-link>
     </div>
+    <div class="btn">
+      <router-link to="/orderHistory">
+        <button type="button">注文履歴を確認する</button>
+      </router-link>
+    </div>
   </div>
 </template>
 

@@ -17,9 +17,15 @@
           <tr v-for="(cartItem, index) of cartList" v-bind:key="cartItem.isbn">
             <td>
               <div class="itemImageAndTitle">
-                <img v-bind:src="cartItem.book.mediumImageUrl" />
+                <router-link v-bind:to="'/itemDetail/' + cartItem.isbn">
+                  <img v-bind:src="cartItem.book.mediumImageUrl" />
+                </router-link>
                 <div class="itemTitleAndAuthor">
-                  <div class="itemTitle">{{ cartItem.book.title }}</div>
+                  <router-link v-bind:to="'/itemDetail/' + cartItem.isbn">
+                    <div class="itemTitle">
+                      {{ cartItem.book.title }}
+                    </div>
+                  </router-link>
                   <div>{{ cartItem.book.author }}</div>
                 </div>
               </div>
@@ -139,8 +145,9 @@ h1 {
 }
 .itemTitle {
   font-size: 18px;
-  font-weight: 400;
+  color: black;
 }
+
 .totalPrice {
   text-align: center;
   font-size: 25px;
