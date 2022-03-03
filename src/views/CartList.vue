@@ -65,6 +65,11 @@
         <button class="goOrderButton" type="button">購入手続きへ進む</button>
       </router-link>
     </div>
+    <div>
+      <router-link to="/" class="returnShopping"
+        ><p>お買い物を続ける</p></router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -178,5 +183,13 @@ h1 {
 
 .deleteButton {
   margin-right: 10px;
+}
+.returnShopping {
+  text-align: center;
+  text-decoration: none;
+  color: #0085cd;
+}
+.returnShopping:hover {
+  text-decoration: underline;
 }
 </style>
