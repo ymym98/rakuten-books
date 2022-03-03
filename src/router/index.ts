@@ -5,10 +5,6 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/orderHistory",
-    component: () => import("../views/OrderHistory.vue"),
-  },
-  {
     path: "/orderComplete",
     component: () => import("../views/OrderComplete.vue"),
   },
