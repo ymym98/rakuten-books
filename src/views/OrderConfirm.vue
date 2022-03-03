@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div class="bread">
+      <ul>
+        <li>カート</li>
+        <li id="breadOrderConfirm">注文内容確認</li>
+        <li>注文完了</li>
+      </ul>
+    </div>
     <div class="registration">注文内容確認</div>
     <ul class="orderConfirm">
       <li class="item">商品</li>
@@ -321,11 +328,48 @@ export default class OrderConfirm extends Vue {
 </script>
 
 <style scoped>
+#breadOrderConfirm {
+  color: #0085cd;
+  font-weight: bold;
+}
+
+.bread {
+  width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.bread ul {
+  display: flex; /* 子要素(li)を横一列に並べる */
+  list-style-type: none; /* リスト要素に表示されている"・"を非表示 */
+  justify-content: center;
+  background-color: #f3f1e4;
+  border-radius: 30px;
+}
+
+.bread li {
+  padding: 5px; /* リンク間の間隔を調整 */
+  font-size: 20px; /* リンクの文字サイズを調整 */
+}
+
+.bread li:after {
+  content: "\025b6"; /* 「>」を要素間の区切り文字として表示 */
+  margin-left: 10px; /* 区切り文字と要素の間隔を調整 */
+  margin-right: 10px; /* 区切り文字と要素の間隔を調整 */
+  color: gray; /* 区切り文字の文字色 */
+  font-weight: 100;
+}
+
+.bread li:last-child:after {
+  content: ""; /* 最後のliの後ろには区切り文字を表示しない */
+}
+
 .registration {
   text-align: center;
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 .item {
   font-size: 20px;
