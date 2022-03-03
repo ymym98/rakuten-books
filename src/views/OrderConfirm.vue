@@ -173,7 +173,7 @@ export default class OrderConfirm extends Vue {
     // orderIdを付与する
     let orderId = 0;
 
-    // usersコレクションの中のordersコレクションのを取得し、sizeプロパティで要素の数を取得
+    // usersコレクションの中のordersコレクションを取得し、sizeプロパティで要素の数を取得
     await firestoreDb
       .collection("users")
       .doc(customerEmail)
