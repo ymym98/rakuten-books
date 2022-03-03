@@ -2,6 +2,7 @@
   <div>
     <h2>ご注文完了</h2>
     <div class="completeMsg">ご注文ありがとうございました</div>
+    <div class="msg"><p>ご注文の商品が届くまでもう少々お待ちください</p></div>
     <div class="btn">
       <router-link to="/">
         <button type="button">商品一覧ページにもどる</button>
@@ -25,11 +26,15 @@ h2 {
 .completeMsg {
   font-size: 40px;
   font-weight: bold;
-  /* color: #583822; */
   text-align: center;
 }
 .btn {
   text-align: center;
+}
+.msg {
+  text-align: center;
+  margin: 20px 0 0 0;
+  font-size: 20px;
 }
 button {
   width: 200px;
