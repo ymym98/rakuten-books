@@ -140,7 +140,7 @@ export default class CartList extends Vue {
 }
 
 .bread {
-  width: 500px;
+  width: 450px;
   margin-right: auto;
   margin-left: auto;
 }
