@@ -63,10 +63,8 @@
         }}</span>
       </div>
     </div>
-    <div class="goOrder">
-      <router-link to="/orderConfirm">
-        <button class="goOrderButton" type="button">購入手続きへ進む</button>
-      </router-link>
+    <div class="goOrder" @click="goOrder">
+      <button class="goOrderButton" type="button">購入手続きへ進む</button>
     </div>
     <div>
       <router-link to="/" class="returnShopping"
@@ -93,7 +91,18 @@ export default class CartList extends Vue {
     if (this.cartList.length === 0) {
       this.errorMsg = "カートに商品が入っていません";
     }
-    console.log("カートリストの中身：" + JSON.stringify(this.cartList));
+  }
+
+  /**
+   * カートリストに商品が入っていないと購入手続きに進めないようにする.
+   */
+  goOrder(): void {
+    if (this.cartList.length === 0) {
+      this.errorMsg = "カートに商品が入っていません";
+      return;
+    } else {
+      this.$router.push("/orderConfirm");
+    }
   }
 
   /**
