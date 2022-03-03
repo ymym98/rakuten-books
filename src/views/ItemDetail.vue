@@ -178,6 +178,7 @@ select {
 }
 
 h1 {
+  text-align: left;
   margin-bottom: 20px;
 }
 .bookCaption {
