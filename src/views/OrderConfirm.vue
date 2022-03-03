@@ -119,6 +119,11 @@
         ご注文を確定
       </button>
     </div>
+    <div>
+      <router-link to="/cartList" class="returnCartList"
+        ><p>カートリストに戻る</p></router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -371,5 +376,13 @@ li {
 }
 .orderDone {
   text-align: center;
+}
+.returnCartList {
+  text-align: center;
+  text-decoration: none;
+  color: #0085cd;
+}
+.returnCartList:hover {
+  text-decoration: underline;
 }
 </style>

@@ -21,8 +21,11 @@
                   <img v-bind:src="cartItem.book.mediumImageUrl" />
                 </router-link>
                 <div class="itemTitleAndAuthor">
-                  <router-link v-bind:to="'/itemDetail/' + cartItem.isbn">
-                    <div class="itemTitle">
+                  <router-link
+                    v-bind:to="'/itemDetail/' + cartItem.isbn"
+                    class="itemTitle"
+                  >
+                    <div>
                       {{ cartItem.book.title }}
                     </div>
                   </router-link>
@@ -150,6 +153,7 @@ h1 {
 }
 .itemTitle {
   font-size: 18px;
+  text-decoration: none;
   color: black;
 }
 
