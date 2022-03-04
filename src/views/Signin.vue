@@ -77,7 +77,7 @@ export default class Signin extends Vue {
       this.$router.push("/");
     } catch (error) {
       console.log(error);
-      this.errorSignin = "ログインできませんでした";
+      this.errorSignin = "メールアドレスまたはパスワードが違います";
     }
   }
 }
