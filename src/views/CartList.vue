@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div class="bread">
+      <ul>
+        <li id="cart">カート</li>
+        <li>注文内容確認</li>
+        <li>注文完了</li>
+      </ul>
+    </div>
     <div>
       <h1>
         ショッピングカート
@@ -21,8 +28,11 @@
                   <img v-bind:src="cartItem.book.mediumImageUrl" />
                 </router-link>
                 <div class="itemTitleAndAuthor">
-                  <router-link v-bind:to="'/itemDetail/' + cartItem.isbn">
-                    <div class="itemTitle">
+                  <router-link
+                    v-bind:to="'/itemDetail/' + cartItem.isbn"
+                    class="itemTitle"
+                  >
+                    <div>
                       {{ cartItem.book.title }}
                     </div>
                   </router-link>
@@ -60,10 +70,13 @@
         }}</span>
       </div>
     </div>
-    <div class="goOrder">
-      <router-link to="/orderConfirm">
-        <button class="goOrderButton" type="button">購入手続きへ進む</button>
-      </router-link>
+    <div class="goOrder" @click="goOrder">
+      <button class="goOrderButton" type="button">購入手続きへ進む</button>
+    </div>
+    <div>
+      <router-link to="/" class="returnShopping"
+        ><p>お買い物を続ける</p></router-link
+      >
     </div>
   </div>
 </template>
@@ -85,7 +98,18 @@ export default class CartList extends Vue {
     if (this.cartList.length === 0) {
       this.errorMsg = "カートに商品が入っていません";
     }
-    console.log("カートリストの中身：" + JSON.stringify(this.cartList));
+  }
+
+  /**
+   * カートリストに商品が入っていないと購入手続きに進めないようにする.
+   */
+  goOrder(): void {
+    if (this.cartList.length === 0) {
+      this.errorMsg = "カートに商品が入っていません";
+      return;
+    } else {
+      this.$router.push("/orderConfirm");
+    }
   }
 
   /**
@@ -110,6 +134,42 @@ export default class CartList extends Vue {
 </script>
 
 <style>
+#cart {
+  color: #0085cd;
+  font-weight: bold;
+}
+
+.bread {
+  width: 450px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.bread ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  background-color: #f3f1e4;
+  border-radius: 30px;
+}
+
+.bread li {
+  padding: 5px;
+  font-size: 20px;
+}
+
+.bread li:after {
+  content: "\025b6";
+  margin-left: 10px;
+  margin-right: 10px;
+  color: gray;
+  font-weight: 100;
+}
+
+.bread li:last-child:after {
+  content: "";
+}
+
 .productName {
   width: 600px;
 }
@@ -127,6 +187,7 @@ table {
 }
 h1 {
   text-align: center;
+  margin-top: 20px;
 }
 .errorMsg {
   color: #f11e46;
@@ -145,6 +206,7 @@ h1 {
 }
 .itemTitle {
   font-size: 18px;
+  text-decoration: none;
   color: black;
 }
 
@@ -178,5 +240,13 @@ h1 {
 
 .deleteButton {
   margin-right: 10px;
+}
+.returnShopping {
+  text-align: center;
+  text-decoration: none;
+  color: #0085cd;
+}
+.returnShopping:hover {
+  text-decoration: underline;
 }
 </style>

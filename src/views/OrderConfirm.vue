@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div class="bread">
+      <ul>
+        <li>カート</li>
+        <li id="breadOrderConfirm">注文内容確認</li>
+        <li>注文完了</li>
+      </ul>
+    </div>
     <div class="registration">注文内容確認</div>
     <ul class="orderConfirm">
       <li class="item">商品</li>
@@ -119,6 +126,11 @@
         ご注文を確定
       </button>
     </div>
+    <div>
+      <router-link to="/cartList" class="returnCartList"
+        ><p>カートリストに戻る</p></router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -159,8 +171,13 @@ export default class OrderConfirm extends Vue {
   private errorPaymentMethod = "";
 
   created(): void {
+    // ログインしていなければログイン画面へ遷移
+    if (this.$store.getters.getLoginFlag === false) {
+      this.$router.push("/signin");
+      return;
+    }
+
     this.cartList = this.$store.getters.getCartList;
-    // console.log("カートリスト:" + JSON.stringify(this.cartList));
     this.autoInput();
   }
 
@@ -198,7 +215,6 @@ export default class OrderConfirm extends Vue {
         cardName: this.cardName,
         cardExpiration: this.cardMonth + "/" + this.cardYear,
       });
-      console.log("クレジットカードで購入しました");
     } else if (Number(this.paymentMethod) === 1) {
       // 代金引換で支払いの場合
       await setDoc(doc(db, "users", customerEmail, "orders", String(orderId)), {
@@ -210,7 +226,6 @@ export default class OrderConfirm extends Vue {
         totalPrice: this.getTotalPrice,
         orderDate: String(new Date()),
       });
-      console.log("代金引換で購入しました");
     } else {
       this.errorPaymentMethod = "※お支払い方法を選択してください";
       return;
@@ -281,8 +296,7 @@ export default class OrderConfirm extends Vue {
       this.address = docSnap.data().address;
       this.buildingName = docSnap.data().buildingName;
     } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
+      console.log("ドキュメントがありません");
     }
   }
 
@@ -316,11 +330,48 @@ export default class OrderConfirm extends Vue {
 </script>
 
 <style scoped>
+#breadOrderConfirm {
+  color: #0085cd;
+  font-weight: bold;
+}
+
+.bread {
+  width: 450px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.bread ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  background-color: #f3f1e4;
+  border-radius: 30px;
+}
+
+.bread li {
+  padding: 5px;
+  font-size: 20px;
+}
+
+.bread li:after {
+  content: "\025b6";
+  margin-left: 10px;
+  margin-right: 10px;
+  color: gray;
+  font-weight: 100;
+}
+
+.bread li:last-child:after {
+  content: "";
+}
+
 .registration {
   text-align: center;
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 .item {
   font-size: 20px;
@@ -371,5 +422,13 @@ li {
 }
 .orderDone {
   text-align: center;
+}
+.returnCartList {
+  text-align: center;
+  text-decoration: none;
+  color: #0085cd;
+}
+.returnCartList:hover {
+  text-decoration: underline;
 }
 </style>

@@ -4,45 +4,97 @@
     <div class="errorMsg">{{ errorSignup }}</div>
     <form>
       <div class="registrationForm">
-        <div class="msg">メールアドレスを利用して会員登録をする</div>
-        <div>
-          {{ errorName }}
-          <input type="text" placeholder="氏名" v-model="name" />
+        <div class="errorMsg">{{ errorName }}</div>
+        <div class="formName">
+          <div>
+            <label for="lastName"> 氏名（姓）</label>
+            <input
+              type="text"
+              placeholder="姓"
+              v-model="lastName"
+              class="inputName"
+              id="lastName"
+            />
+          </div>
+          <div>
+            <label for="firstName"> 氏名（名）</label>
+            <input
+              type="text"
+              placeholder="名"
+              v-model="firstName"
+              class="inputName"
+              id="firstName"
+            />
+          </div>
         </div>
 
         <div class="email">
           <div class="errorMsg">{{ errorEmail }}</div>
-          <input
-            type="email"
-            placeholder="メールアドレス（半角/英数）"
-            v-model="email"
-          />
+          <div>
+            <label for="inputEmail"> メールアドレス（半角/英数）</label>
+            <input
+              type="email"
+              placeholder="メールアドレス（半角/英数）"
+              v-model="email"
+              class="inputEmail"
+              id="inputEmail"
+            />
+          </div>
         </div>
         <div class="password">
           <div class="errorMsg">{{ errorPassword }}</div>
-          <input
-            type="password"
-            placeholder="パスワード（半角/英数）"
-            v-model="password"
-          />
-          <div class="errorMsg">{{ errorCheckPassword }}</div>
-          <input
-            type="password"
-            placeholder="確認用パスワード（半角/英数）"
-            v-model="checkPassword"
-          />
-        </div>
-        <div>
-          {{ errorZipCode }}
-          <input type="text" placeholder="郵便番号" v-model="zipCode" />
-          <button type="button" @click="getAddressByZipCode">
-            住所自動検索
-          </button>
-        </div>
-        <div>
-          {{ errorSelected }}
-          <span>所在地（都道府県）</span>
+          <div>
+            <label for="inputPassword">パスワード（半角/英数）</label>
+            <input
+              type="password"
+              placeholder="6文字以上（半角/英数）"
+              v-model="password"
+              class="inputPassword"
+              id="inputPassword"
+            />
+          </div>
 
+          <div class="errorMsg">{{ errorCheckPassword }}</div>
+          <div>
+            <label for="inputCheckPassword"
+              >確認用パスワード（半角/英数）</label
+            >
+            <input
+              type="password"
+              placeholder="確認用パスワード（半角/英数）"
+              v-model="checkPassword"
+              class="inputPassword"
+              id="inputCheckPassword"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="errorMsg">
+            {{ errorZipCode }}
+          </div>
+          <div>
+            <div><label for="inputZipCode">郵便番号</label></div>
+            <input
+              type="text"
+              placeholder="郵便番号"
+              v-model="zipCode"
+              class="inputZipCode"
+              id="inputZipCode"
+            />
+            <button
+              type="button"
+              @click="getAddressByZipCode"
+              class="searchZipCode"
+            >
+              検索
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div class="errorMsg">{{ errorSelected }}</div>
+
+          <div><label>所在地（都道府県）</label></div>
           <select name="pref" v-model="selected">
             <option value="" selected>都道府県</option>
             <option value="北海道">北海道</option>
@@ -95,21 +147,32 @@
           </select>
         </div>
         <div>
-          {{ errorMunicipality }}
+          <div class="errorMsg">{{ errorMunicipality }}</div>
+
+          <label for="inputMunicipality">所在地（市区町村/番地）</label>
           <input
             type="text"
             placeholder="所在地（市区町村/番地）"
             v-model="municipality"
+            class="inputMunicipality"
+            id="inputMunicipality"
           />
         </div>
         <div>
+          <label for="inputBuildingName">所在地（建物名）</label>
           <input
             type="text"
             placeholder="所在地（建物名）"
             v-model="buildingName"
+            class="inputBuildingName"
+            id="inputBuildingName"
           />
         </div>
-        <button type="button" @click="signup"><span>登録</span></button>
+        <div class="btnAdjust">
+          <button type="button" @click="signup" class="signupBtn">
+            <span>登録</span>
+          </button>
+        </div>
       </div>
     </form>
   </div>
@@ -120,15 +183,14 @@ import { Component, Vue } from "vue-property-decorator";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app, db } from "../config/firebase-config";
 import axios from "axios";
-// import { initializeApp } from "firebase/app";
-// import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
-// import { directive } from "vue/types/umd";
 
 @Component
 export default class Signup extends Vue {
-  // 名前
-  private name = "";
+  // 姓
+  private lastName = "";
+  // 名
+  private firstName = "";
   // メールアドレス
   private email = "";
   // パスワード
@@ -186,29 +248,31 @@ export default class Signup extends Vue {
       createUserWithEmailAndPassword(auth, this.email, this.password);
       // ユーザー情報をfirestoreに送る
       await setDoc(doc(db, "users", this.email), {
-        name: this.name,
+        name: this.lastName + this.firstName,
         email: this.email,
         password: this.password,
         zipCode: this.zipCode,
         address: this.selected + this.municipality + this.buildingName,
       });
 
-      alert("会員登録に成功しました！");
-      this.$store.commit("login");
-      this.$router.push("/");
+      alert("会員登録が完了しました。\nログイン画面からログインしてください。");
+      this.$router.push("/signin");
     } catch (error) {
       this.errorSignup = "会員登録に失敗しました";
       console.log("エラー発生：" + error);
     }
   }
 
+  /**
+   * 入力値のエラーチェックをする.
+   */
   hasErrors(): boolean {
     // false←エラーなし, true←エラーあり
     let hasError = false;
 
-    // 名前のエラーチェック
-    if (this.name === "") {
-      this.errorName = "氏名を入力してください";
+    // 氏名のエラーチェック
+    if (this.lastName === "" || this.firstName === "") {
+      this.errorName = "姓または名を入力してください";
       hasError = true;
     }
     // メールアドレスのエラーチェック
@@ -251,7 +315,7 @@ export default class Signup extends Vue {
     }
     // 市区町村のエラーチェック
     if (this.municipality === "") {
-      this.errorMunicipality = "所在地（市区町村/番地）を入力してください";
+      this.errorMunicipality = "市区町村/番地を入力してください";
       hasError = true;
     }
     return hasError;
@@ -280,11 +344,13 @@ export default class Signup extends Vue {
 <style scoped>
 .registrationForm {
   margin-top: auto;
+  width: 300px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .errorMsg {
   color: red;
-  text-align: center;
 }
 
 .registration {
@@ -292,25 +358,69 @@ export default class Signup extends Vue {
   text-align: center;
   margin-bottom: 10px;
 }
-.msg {
-  padding-top: 10px;
-  padding-bottom: 20px;
-}
+
 form {
-  /* background-color: #f8f7ef; */
-  width: 569px;
-  height: 268.984px;
-  padding: 30px 40px 30px 40px;
-  text-align: center;
+  background-color: #f8f7ef;
+  padding: 20px 40px 30px 40px;
   margin-left: auto;
   margin-right: auto;
+  width: 500px;
 }
 input {
-  width: 400px;
   height: 38px;
   margin-bottom: 15px;
 }
-button {
+.formName {
+  display: flex;
+}
+.inputName {
+  width: 150px;
+}
+#lastName {
+  margin-right: 10px;
+}
+.inputEmail {
+  width: 296px;
+}
+.inputPassword {
+  width: 200px;
+}
+.inputZipCode {
+  width: 80px;
+}
+.searchZipCode {
+  border-radius: 4px;
+  border: 1px solid gray;
+  height: 30px;
+  padding: 5px;
+  font-size: 13px;
+  margin-left: 5px;
+  background-color: lightgray;
+}
+.searchZipCode:hover {
+  background-color: rgb(224, 224, 224);
+}
+
+select {
+  width: 100px;
+  height: 25px;
+  font-size: 17px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.inputMunicipality {
+  /* margin-top: 15px; */
+  width: 300px;
+}
+.inputBuildingName {
+  width: 300px;
+}
+
+.btnAdjust {
+  text-align: center;
+}
+.signupBtn {
   height: 38px;
   border: unset;
   color: white;
@@ -319,7 +429,8 @@ button {
   background-color: #f25371;
   margin-top: 12px;
 }
-button:hover {
+
+.signupBtn:hover {
   background-color: #f58394;
 }
 </style>
