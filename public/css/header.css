@@ -1,12 +1,18 @@
 @charset "UTF-8";
+
+.icon_btn {
+  align-self: center;
+  margin: 8px 0 0 10px;
+}
+
 .icon {
-  width: 127px;
-  height: 127px;
+  width: 200px;
+  height: 60px;
 }
 
 header {
   width: 1440px;
-  height: 127px;
+  height: 80px;
   background-color: #f3f1e4;
   display: flex;
   position: fixed;

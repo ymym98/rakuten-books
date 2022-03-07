@@ -1,10 +1,33 @@
 <template>
   <div>
     <ul class="nav">
-      <li class="nav_item"><a href="#"> Home</a></li>
-      <li class="nav_item"><a href="#">Service</a></li>
-      <li class="nav_item"><a href="#">About</a></li>
-      <li class="nav_item" @click="logout" v-if="loginFlag"><a>Logout</a></li>
+      <li class="nav_item">
+        <router-link to="/" class="nav_item_style">
+          <img class="icon" src="/img/list.png" />
+          <div>商品一覧</div>
+        </router-link>
+      </li>
+
+      <li class="nav_item">
+        <router-link to="/cartList" class="nav_item_style">
+          <img class="shoppingCartIcon icon" src="/img/shopping-cart.png" />
+          <div>買い物かご</div>
+        </router-link>
+      </li>
+
+      <li class="nav_item" @click="logout" v-if="loginFlag">
+        <router-link to="/" class="nav_item_style">
+          <img src="/img/logout.png" class="icon" />
+          <div>ログアウト</div>
+        </router-link>
+      </li>
+
+      <li class="nav_item" v-if="loginFlag">
+        <div class="nav_item_style">
+          <img class="icon" src="/img/user.png" />
+          <div class="name">{{ getLoginUserName + "さん" }}</div>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -32,6 +55,12 @@ export default class HeaderMenu extends Vue {
   get loginFlag(): boolean {
     return this.$store.getters.getLoginFlag;
   }
+  /**
+   * ログインしたユーザーの名前を取得する.
+   */
+  get getLoginUserName(): string {
+    return this.$store.getters.getLoginUserName;
+  }
 }
 </script>
 
@@ -40,18 +69,27 @@ export default class HeaderMenu extends Vue {
   display: flex;
   list-style: none;
   align-items: flex-end;
+  justify-content: flex-end;
 }
 .nav_item {
-  width: calc(100% / 4);
+  margin: 10px 0px 0 0;
+  text-align: center;
+  font-size: 13px;
+  width: 100px;
 }
 
-.nav_item > a {
-  display: block;
-  padding: 20px;
-  text-align: center;
+.nav_item_style {
   text-decoration: none;
-  font-weight: bold;
   color: black;
-  font-size: 20px;
+  text-align: center;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.shoppingCartIcon {
+  margin-right: 8px;
 }
 </style>
