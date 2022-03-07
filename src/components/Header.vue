@@ -2,7 +2,7 @@
   <header>
     <div class="icon_btn">
       <router-link to="/">
-        <img class="icon" src="/img/yumi_book.png" />
+        <img class="icon" src="/img/Yumi_Books.png" />
       </router-link>
     </div>
     <header-menu class="headerMenu"></header-menu>
@@ -13,7 +13,6 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import AfterSignin from "./AfterSignin.vue";
 import HeaderMenu from "./HeaderMenu.vue";
 import SignUpBtn from "./SignUpBtn.vue";
 
@@ -21,7 +20,6 @@ import SignUpBtn from "./SignUpBtn.vue";
   components: {
     SignUpBtn,
     HeaderMenu,
-    AfterSignin,
   },
 })
 export default class Header extends Vue {
@@ -38,13 +36,13 @@ export default class Header extends Vue {
 @import "../../public/css/header.css";
 
 .headerMenu {
-  padding-top: 30px;
+  margin-top: 5px;
   width: 100%;
 }
 
 .signUpBtn {
   margin-left: auto;
-  padding-top: 40px;
+  padding-top: 20px;
   padding-right: 20px;
 }
 </style>
