@@ -23,19 +23,18 @@
               }}</span>
               <span>円</span>
             </div>
-            <!-- <ShareNetwork
+            <ShareNetwork
               network="twitter"
               :url="currentBook.itemUrl"
               :title="'『' + currentBook.title + '』'"
             >
               <div>
-                <v-icon
-                  ><img
-                    class="twitterIcon"
-                    src="/img/icons8-twitter-squared-48.png"
-                /></v-icon>
+                <img
+                  class="twitterIcon"
+                  src="/img/icons8-twitter-squared-48.png"
+                />
               </div>
-            </ShareNetwork> -->
+            </ShareNetwork>
           </div>
           <div class="addCart">
             <div>
