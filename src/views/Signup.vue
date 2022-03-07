@@ -351,6 +351,7 @@ export default class Signup extends Vue {
 
 .errorMsg {
   color: red;
+  font-size: 16px;
 }
 
 .registration {
