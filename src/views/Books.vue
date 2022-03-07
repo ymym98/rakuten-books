@@ -13,12 +13,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   components: { BookItem },
 })
-export default class Books extends Vue {
-  created(): void {
-    const loginFlag = this.$store.getters.getLoginFlag;
-    console.log(loginFlag);
-  }
-}
+export default class Books extends Vue {}
 </script>
 
 <style scoped>

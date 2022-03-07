@@ -22,7 +22,15 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class OrderComplete extends Vue {}
+export default class OrderComplete extends Vue {
+  created(): void {
+    // ログインしていなければログイン画面へ遷移
+    if (this.$store.getters.getLoginFlag === false) {
+      this.$router.push("/signin");
+      return;
+    }
+  }
+}
 </script>
 
 <style scoped>

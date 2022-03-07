@@ -82,9 +82,6 @@ export default class ItemDetail extends Vue {
     this.currentBook = this.$store.getters.getBookList.find(
       ({ isbn }: { isbn: string }) => isbn === this.$route.params.isbn
     );
-
-    console.log("現在の配列情報：" + JSON.stringify(this.currentBook));
-    console.log("isbn:" + JSON.stringify(this.currentBook.isbn));
   }
 
   /**

@@ -171,8 +171,13 @@ export default class OrderConfirm extends Vue {
   private errorPaymentMethod = "";
 
   created(): void {
+    // ログインしていなければログイン画面へ遷移
+    if (this.$store.getters.getLoginFlag === false) {
+      this.$router.push("/signin");
+      return;
+    }
+
     this.cartList = this.$store.getters.getCartList;
-    // console.log("カートリスト:" + JSON.stringify(this.cartList));
     this.autoInput();
   }
 
@@ -210,7 +215,6 @@ export default class OrderConfirm extends Vue {
         cardName: this.cardName,
         cardExpiration: this.cardMonth + "/" + this.cardYear,
       });
-      console.log("クレジットカードで購入しました");
     } else if (Number(this.paymentMethod) === 1) {
       // 代金引換で支払いの場合
       await setDoc(doc(db, "users", customerEmail, "orders", String(orderId)), {
@@ -222,7 +226,6 @@ export default class OrderConfirm extends Vue {
         totalPrice: this.getTotalPrice,
         orderDate: String(new Date()),
       });
-      console.log("代金引換で購入しました");
     } else {
       this.errorPaymentMethod = "※お支払い方法を選択してください";
       return;
@@ -293,8 +296,7 @@ export default class OrderConfirm extends Vue {
       this.address = docSnap.data().address;
       this.buildingName = docSnap.data().buildingName;
     } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
+      console.log("ドキュメントがありません");
     }
   }
 

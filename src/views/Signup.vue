@@ -255,7 +255,7 @@ export default class Signup extends Vue {
         address: this.selected + this.municipality + this.buildingName,
       });
 
-      alert("会員登録に成功しました！");
+      alert("会員登録が完了しました。\nログイン画面からログインしてください。");
       this.$router.push("/signin");
     } catch (error) {
       this.errorSignup = "会員登録に失敗しました";
@@ -364,7 +364,7 @@ form {
   padding: 20px 40px 30px 40px;
   margin-left: auto;
   margin-right: auto;
-  width: 450px;
+  width: 500px;
 }
 input {
   height: 38px;
