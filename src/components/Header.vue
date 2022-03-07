@@ -6,8 +6,9 @@
       </router-link>
     </div>
     <header-menu class="headerMenu"></header-menu>
-    <div v-if="loginFlag"><after-signin></after-signin></div>
-    <div v-else><sign-up-btn class="signUpBtn"></sign-up-btn></div>
+    <div v-if="loginFlag === false">
+      <sign-up-btn class="signUpBtn"></sign-up-btn>
+    </div>
   </header>
 </template>
 
