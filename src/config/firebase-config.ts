@@ -10,6 +10,8 @@ const firebaseConfig = {
   databaseURL: process.env.VUE_APP_DATABASE_URL,
 };
 
+console.log("projectId:" + process.env.VUE_APP_PROJECT_ID);
+
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const database = getDatabase();
