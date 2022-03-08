@@ -1,4 +1,3 @@
-import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 import firebase from "firebase/compat/app";
@@ -16,6 +15,5 @@ export const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig) // ← なかったら初期化
   : firebase.app(); // ← あったらインスタンスを取得
 
-export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const database = getDatabase();
