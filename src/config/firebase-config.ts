@@ -11,8 +11,6 @@ const firebaseConfig = {
   databaseURL: process.env.VUE_APP_DATABASE_URL,
 };
 
-console.log("projectId:" + process.env.VUE_APP_PROJECT_ID);
-
 export const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app();
