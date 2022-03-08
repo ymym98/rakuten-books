@@ -8,7 +8,7 @@ const firebaseConfig = {
   authDomain: process.env.VUE_APP_AUTH_DOMAIN,
   projectId: process.env.VUE_APP_PROJECT_ID,
   storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
-  databaseURL: "https://test-rakutenapi-books.firebaseio.com",
+  databaseURL: process.env.VUE_APP_DATABASE_URL,
 };
 
 export const firebaseApp = !firebase.apps.length
