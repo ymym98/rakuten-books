@@ -6,9 +6,9 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_APIKEY,
   authDomain: process.env.VUE_APP_AUTH_DOMAIN,
-  projectId: "test-rakutenapi-books",
+  projectId: process.env.VUE_APP_PROJECT_ID,
   storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
-  databaseURL: "https://test-rakutenapi-books-default-rtdb.firebaseio.com",
+  databaseURL: "https://test-rakutenapi-books.firebaseio.com",
 };
 
 export const firebaseApp = !firebase.apps.length
