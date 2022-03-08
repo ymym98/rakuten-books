@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
+import firebase from "firebase/compat/app";
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_APIKEY,
@@ -11,6 +12,10 @@ const firebaseConfig = {
 };
 
 console.log("projectId:" + process.env.VUE_APP_PROJECT_ID);
+
+export const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
