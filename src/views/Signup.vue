@@ -181,7 +181,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app, db } from "../config/firebase-config";
+import { firebaseApp, db } from "../config/firebase-config";
 import axios from "axios";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -244,7 +244,7 @@ export default class Signup extends Vue {
       return;
     }
     try {
-      const auth = getAuth(app);
+      const auth = getAuth(firebaseApp);
       createUserWithEmailAndPassword(auth, this.email, this.password);
       // ユーザー情報をfirestoreに送る
       await setDoc(doc(db, "users", this.email), {
